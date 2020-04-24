@@ -1,0 +1,28 @@
+{% extends '../base.html' %} {% block title %} Login {% endblock %} {% load crispy_forms_tags %} {% block content %} {% load crispy_forms_tags %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1">
+            <a href="{% url 'home' %}" class="btn btn-dark rounded-pill my-3">HOME</a>
+        </div>
+    </div>
+</div>
+
+<div class="container col-md-4">
+    <div class="card mb-3 shadow-lg">
+        <div class="card-body text-dark">
+            <h2 class="card-title">Login</h2>
+            <hr>
+            <p class="card-text">
+                <form action="" method="post">
+                    {% csrf_token %} {{ form|crispy }}
+                    <p>Don't have an account? Register <a href="{% url 'register' %}">here</a>.</p>
+                    <button type="submit" class='btn btn-dark rounded-pill'>LOGIN</button>
+                </form>
+            </p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

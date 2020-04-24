@@ -1,0 +1,31 @@
+{% extends '../base.html' %} {% load filename %} {% block title %}Dashboard{% endblock %} {% block content %}
+
+<div class="container d-flex">
+    <a href="{% url 'dataUpload' %}" class="text-dark">
+        <div class="row bg-white shadow-lg rounded-pill text-center mx-2 mb-1">
+            <div class="col-md-12 py-2">
+                <h2><i class="fas mr-1 fa-plus"></i>File</h2>
+            </div>
+        </div>
+    </a>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        {% for dataset in datasets %}
+        <div class="card card-body col-md-4 mx-1 shadow-lg my-2">
+            <h2><i class="fas fa-file"></i></h2>
+            <h5 style="white-space: nowrap;">{{ dataset.file_in_memory|filename }}</h5>
+            Uploaded at:{{ dataset.created_at|date:"d/m/y" }} {{ dataset.created_at|time:"H:i:s" }}
+            <a href="{% url 'dataDelete' path=dataset.id %}" class="h5 text-dark"><i class="fas fa-trash"></i> Delete</a>
+            <a href="{% url 'download' dataset.id %}" class="h5 text-dark" download><i class="fas fa-download"></i> Download</a>
+            <a href="{% url 'share' dataset.id %}" class="h5 text-dark"><i class="fas fa-share"></i> Get sharing Link</a> {% if dataset.share %}
+            <button onclick="copy(this)" class="btn btn-warning rounded-pill">{{domain}}{% url 'download' dataset.id %}</button>
+            <a href="{% url 'offshare' dataset.id %}" class="text-dark"><i class="fas fa-times"></i> Turn of link sharing of this file</a> {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<hr> {% endblock %}
