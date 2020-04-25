@@ -8,6 +8,7 @@ from django.http import HttpResponse, Http404
 from django.contrib.sites.models import Site
 import os
 
+@login_required(login_url='login')
 def Download(request, id):
     if (UploadDataset.objects.filter(id=id)[0].user == request.user) or UploadDataset.objects.filter(id=id)[0].share :
         path = str(UploadDataset.objects.filter(id=id)[0])
