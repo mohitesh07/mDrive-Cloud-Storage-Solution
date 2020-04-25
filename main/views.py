@@ -23,7 +23,6 @@ def Download(request, id):
     else:
         raise Http404
 
-@login_required(login_url='login')
 def Share(request, id):
     if UploadDataset.objects.filter(id=id)[0].user == request.user:
         UploadDataset.objects.filter(id=id).update(share=True)
